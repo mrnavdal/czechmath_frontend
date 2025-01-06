@@ -14,30 +14,38 @@ export default function DashboardPage() {
   }, [status]);
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-xl">Načítání...</div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">
-          Dashboard
-        </h1>
-        <div className="bg-white shadow rounded-lg p-6">
-          <p className="text-gray-700">
-            Vítejte v aplikaci CzechMath! Toto je váš dashboard.
-          </p>
-          <p className="text-gray-600 mt-2">
-            Přihlášen jako: {session?.user?.name}
-          </p>
+    <div className="min-h-screen bg-emerald-50">
+      <div className="bg-emerald-600 text-white shadow-lg">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <div>
+            <h1 className="text-2xl font-bold">Uživatelský Dashboard</h1>
+            <p className="text-emerald-200">Aktuální cesta: /dashboard</p>
+          </div>
           <button
-            onClick={() => signOut({callbackUrl:'/'})}
-            className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+            onClick={() => signOut({ callbackUrl: '/api/auth/login' })}
+            className="bg-emerald-500 hover:bg-emerald-400 text-white px-4 py-2 rounded-lg transition-colors"
           >
             Odhlásit se
           </button>
         </div>
       </div>
+      
+      <div className="container mx-auto px-6 py-8">
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-2">Informace o přihlášení</h2>
+            <p className="text-gray-600">Přihlášený uživatel: {session?.user?.email}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
-} 
+}
