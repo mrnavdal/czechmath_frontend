@@ -5,7 +5,7 @@ export default function Home() {
   const isAuthenticated = false;
 
   if (!isAuthenticated) {
-    redirect('/auth/login');
+    redirect('/api/auth/login');
   }
 
   return (
