@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CzechMath",
-  description: "Matematická aplikace pro studenty",
+  description: "CzechMath",
 };
 
 export default function RootLayout({
