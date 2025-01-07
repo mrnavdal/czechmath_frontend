@@ -5,8 +5,6 @@ export const getPageAccessPermission = async (
   request: PageAccessRequest
 ): Promise<PageAccessResponse> => {
   try {
-    // Simulovana latence
-    await new Promise(resolve => setTimeout(resolve, 50));
     
     // Pro zadany token a cestu vrati, jestli uzivatel ma pristup k dane strance
     const response = mockedBackend.getPageAccessPermission(request.accessToken, request.requestedPath);
