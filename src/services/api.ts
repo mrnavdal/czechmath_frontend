@@ -1,15 +1,5 @@
 import { mockedBackend } from "./MockedBackend";
-
-interface PageAccessRequest {
-  accessToken: string;
-  requestedPath: string;
-}
-
-interface PageAccessResponse {
-  status: 'granted' | 'denied';
-  permissions: string[];
-  redirectPath: string | null;
-}
+import { PageAccessRequest, PageAccessResponse } from "./types";
 
 export const getPageAccessPermission = async (
   request: PageAccessRequest
