@@ -2,15 +2,18 @@
 
 import { useSession, signOut } from 'next-auth/react';
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import LogoutButton from '@/components/LogoutButton';
+import { AppRoutes } from '@/utils/AppRoutes';
 
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
-
+  const pathname = usePathname();
   useEffect(() => {
+  
     if (status === 'unauthenticated') {
-      router.push('/api/auth/login');
+      router.push(AppRoutes.LOGIN);
     }
   }, [status, router]);
 
@@ -30,14 +33,10 @@ export default function AdminDashboard() {
           <div className="container mx-auto px-6 py-4 flex justify-between items-center">
             <div>
               <h1 className="text-2xl font-bold">Administrátorský Dashboard</h1>
-              <p className="text-indigo-200">Aktuální cesta: /admin/dashboard</p>
+              <p className="text-indigo-200">Aktuální cesta: {pathname}
+              </p>
             </div>
-            <button
-              onClick={() => signOut({ callbackUrl: '/api/auth/login' })}
-              className="bg-indigo-500 hover:bg-indigo-400 text-white px-4 py-2 rounded-lg transition-colors"
-            >
-              Odhlásit se
-            </button>
+            <LogoutButton backgroundColor="bg-indigo-500" />
           </div>
         </div>
         

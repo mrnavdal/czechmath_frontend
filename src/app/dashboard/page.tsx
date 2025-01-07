@@ -1,15 +1,18 @@
 'use client';
 
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
-import { redirect } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
+import LogoutButton from '@/components/LogoutButton';
+import { AppRoutes } from '@/utils/AppRoutes';
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (status === 'unauthenticated') {
-      redirect('/auth/login');
+      redirect(AppRoutes.LOGIN);  
     }
   }, [status]);
 
@@ -27,14 +30,9 @@ export default function DashboardPage() {
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold">Uživatelský Dashboard</h1>
-            <p className="text-emerald-200">Aktuální cesta: /dashboard</p>
+            <p className="text-emerald-200">Aktuální cesta: {pathname}</p>
           </div>
-          <button
-            onClick={() => signOut({ callbackUrl: '/api/auth/login' })}
-            className="bg-emerald-500 hover:bg-emerald-400 text-white px-4 py-2 rounded-lg transition-colors"
-          >
-            Odhlásit se
-          </button>
+          <LogoutButton backgroundColor="bg-emerald-500" />
         </div>
       </div>
       

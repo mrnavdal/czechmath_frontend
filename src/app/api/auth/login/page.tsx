@@ -3,6 +3,7 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { redirect, useSearchParams } from 'next/navigation';
+import { AppRoutes } from '@/utils/AppRoutes';
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
@@ -16,12 +17,12 @@ export default function LoginPage() {
     }
 
     if (session?.accessToken) {
-      redirect('/redirect');
+      redirect(AppRoutes.REDIRECT);
     }
     if (status === 'unauthenticated') {
       const result = signIn('keycloak', {
         redirect: true,
-        callbackUrl: '/redirect',
+        callbackUrl: AppRoutes.REDIRECT,
       });
       console.log(result);
     }

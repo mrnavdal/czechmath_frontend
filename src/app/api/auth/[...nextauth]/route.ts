@@ -31,8 +31,8 @@ const handler = NextAuth({
     }
   },
   pages: {
-    signIn: '/auth/login',
-    signOut: '/auth/login?logout=true',
+    signIn: '/api/auth/login',
+    signOut: '/api/auth/login?logout=true',
   },
   events: {
     async signOut({ token }) {

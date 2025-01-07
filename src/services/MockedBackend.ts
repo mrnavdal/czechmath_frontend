@@ -1,5 +1,6 @@
 // Mocknuty backend pro testovani
 
+import { AppRoutes } from '@/utils/AppRoutes';
 import { isDevelopment } from '@/utils/environment';
 
 interface TokenInfo {
@@ -35,7 +36,7 @@ export class MockedBackend {
       return {
         status: 'denied',
         permissions: [],
-        redirectPath: '/login'
+        redirectPath: AppRoutes.LOGIN
       };
     }
 
@@ -55,7 +56,7 @@ export class MockedBackend {
     return {
       status: 'denied',
       permissions: [],
-      redirectPath: '/unauthorized'
+      redirectPath: '/login'
     };
   }
 
