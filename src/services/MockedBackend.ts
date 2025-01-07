@@ -1,3 +1,7 @@
+// Mocknuty backend pro testovani
+
+import { isDevelopment } from '@/utils/environment';
+
 interface TokenInfo {
   roles: string[];
   permissions: string[];
@@ -17,8 +21,11 @@ export class MockedBackend {
   ]);
 
   registerToken(token: string, roles: string[], permissions: string[]) {
+    if (!isDevelopment) {
+      console.warn('MockedBackend by se mel pouzivat pouze v development prostredi');
+      return;
+    }
     this.tokenStorage.set(token, { roles, permissions });
-    console.log('Token registered:', token);
   }
 
   getPageAccessPermission(accessToken: string, requestedPath: string): PageAccessResponse {

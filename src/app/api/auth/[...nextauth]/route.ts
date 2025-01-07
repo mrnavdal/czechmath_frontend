@@ -1,3 +1,4 @@
+import { isDevelopment } from '@/utils/environment';
 import NextAuth from 'next-auth';
 import KeycloakProvider from 'next-auth/providers/keycloak';
 
@@ -47,7 +48,9 @@ const handler = NextAuth({
             body: `client_id=${process.env.KEYCLOAK_ID}&refresh_token=${token.accessToken}`,
           });
         } catch (error) {
-          console.error('Error during Keycloak logout:', error);
+          if (isDevelopment) {
+            console.error('Chyba pri odhlasovani z Keycloak:', error);
+          }
         }
       }
     },

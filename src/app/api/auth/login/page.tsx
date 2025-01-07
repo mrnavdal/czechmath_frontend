@@ -3,7 +3,6 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { redirect, useSearchParams } from 'next/navigation';
-import { mockedBackend } from '@/services/MockedBackend';
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
@@ -17,11 +16,8 @@ export default function LoginPage() {
     }
 
     if (session?.accessToken) {
-     
       redirect('/redirect');
-
     }
-    
     if (status === 'unauthenticated') {
       const result = signIn('keycloak', {
         redirect: true,
