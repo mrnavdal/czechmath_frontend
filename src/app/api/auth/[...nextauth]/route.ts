@@ -1,3 +1,4 @@
+import { AppRoutes } from '@/utils/AppRoutes';
 import { isDevelopment } from '@/utils/environment';
 import NextAuth from 'next-auth';
 import KeycloakProvider from 'next-auth/providers/keycloak';
@@ -31,8 +32,8 @@ const handler = NextAuth({
     }
   },
   pages: {
-    signIn: '/api/auth/login',
-    signOut: '/api/auth/login?logout=true',
+    signIn: AppRoutes.LOGIN,
+    signOut: AppRoutes.LOGIN_WITH_LOGOUT,
   },
   events: {
     async signOut({ token }) {
