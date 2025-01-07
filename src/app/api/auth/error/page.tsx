@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { AppRoutes } from '@/utils/AppRoutes';
 
 export default function ErrorPage() {
   const searchParams = useSearchParams();
@@ -32,7 +33,7 @@ export default function ErrorPage() {
         </div>
         <div className="mt-4 text-center">
           <Link 
-            href="/auth/login"
+            href={AppRoutes.LOGIN}
             className="text-blue-600 hover:text-blue-800"
           >
             Zpět na přihlášení

@@ -8,13 +8,14 @@ import { mockedBackend } from '@/services/MockedBackend'
 import { isDevelopment } from '@/utils/environment'
 import { developmentConfig } from '@/config/development'
 import { AppRoutes } from '@/utils/AppRoutes'
+import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 export default function RedirectPage() {
   const router = useRouter()
   const { data: session, status } = useSession();
+  const { status: authStatus } = useAuthRedirect()
 
 
   useEffect(() => {
-    
     const fetchAndRedirect = async () => {
       try {
         const dashboards = await getTokenDashboardLink(session?.accessToken!)
@@ -42,10 +43,6 @@ export default function RedirectPage() {
           mockUser.permissions
         );
       }
-    }
-    if (status === 'unauthenticated') {
-      router.push('/api/auth/login');
-      return;
     }
 
     if (status === 'authenticated') {

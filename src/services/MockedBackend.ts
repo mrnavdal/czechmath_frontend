@@ -2,18 +2,7 @@
 
 import { AppRoutes } from '@/utils/AppRoutes';
 import { isDevelopment } from '@/utils/environment';
-
-interface TokenInfo {
-  roles: string[];
-  permissions: string[];
-}
-
-interface PageAccessResponse {
-  status: 'granted' | 'denied';
-  permissions: string[];
-  redirectPath: string | null;
-}
-
+import { TokenInfo, PageAccessResponse } from '@/services/types';
 export class MockedBackend {
   private tokenStorage: Map<string, TokenInfo> = new Map();
   private pathPermissions: Map<string, string[]> = new Map([

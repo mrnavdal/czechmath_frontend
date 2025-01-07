@@ -1,6 +1,6 @@
 'use client';
 
-import { signIn, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { redirect, useSearchParams } from 'next/navigation';
 import { AppRoutes } from '@/utils/AppRoutes';
@@ -9,24 +9,26 @@ export default function LoginPage() {
   const { data: session, status } = useSession();
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
+  const logout = searchParams.get('logout');
 
   useEffect(() => {
     // Don't redirect there is no dashboard
     if (error === 'no_dashboard') {
       return;
     }
+    
 
     if (session?.accessToken) {
       redirect(AppRoutes.REDIRECT);
     }
-    if (status === 'unauthenticated') {
+    if (status === 'unauthenticated' || logout) {
       const result = signIn('keycloak', {
         redirect: true,
-        callbackUrl: AppRoutes.REDIRECT,
+        callbackUrl: AppRoutes.LOGIN,
       });
       console.log(result);
     }
-  }, [status, session, error]);
+  }, [status, session, error, logout]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
